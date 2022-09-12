@@ -1,21 +1,22 @@
 package application;
 
+import adjacencyList.AdjacencyList;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Program {
 
     public static void main(String[] args) {
 
-        int vertice = 0;
-        int aresta = 0;
+        int vertices = 0;
+        int edges = 0;
 
         Scanner in = new Scanner(System.in);
+        AdjacencyList adjacencyList = new AdjacencyList();
+
 
         String path = "src\\application\\in.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -24,20 +25,25 @@ public class Program {
             while ((line = br.readLine()) != null) {
                 if (i == 0) {
                     i++;
-                    vertice = Integer.parseInt(line);
+                    vertices = Integer.parseInt(line);
+                    adjacencyList = new AdjacencyList(vertices);
                 } else if (i == 1) {
                     i++;
-                    aresta = Integer.parseInt(line);
+                    edges = Integer.parseInt(line);
+                } else {
+                    String[] s = line.split(" ");
+                    adjacencyList.addItem(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
                 }
-
-                //System.out.println(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Ordem: " + vertice);
-        System.out.println("Tamanho: " + aresta);
+        System.out.println(adjacencyList);;
+        System.out.println("Ordem: " + vertices);
+        System.out.println("Tamanho: " + edges);
+        System.out.print("Vertices de extremidades: ");
+        adjacencyList.searchEndVertex();
     }
 
 }
