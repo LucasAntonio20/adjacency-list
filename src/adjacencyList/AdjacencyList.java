@@ -15,24 +15,40 @@ public class AdjacencyList {
         }
     }
 
-    public void searchEndVertex(){
-        for (int i = 0; i < testList.length; i++) {
-            if (testList[i].size() == 1) System.out.print(testList[i]);
+    public void degreeALlVertex(){
+        for (LinkedList list : testList) {
+            System.out.println("[" + list.getFirst() + "]: " + (list.size() - 1));
         }
     }
+
+    public void searchEndVertex(){
+        for (LinkedList list : testList) {
+            if ((list.size() - 1) == 1) System.out.print(list.getFirst() + " ");
+        }
+        System.out.println();
+    }
+
+    public void searchIsolatedVertex() {
+        for (LinkedList list : testList) {
+            if ((list.size() - 1) == 0) System.out.print(list.getFirst() + " ");
+        }
+        System.out.println();
+    }
+
     public void addItem(int index, int value){
-        for (int i = 0; i < testList.length; i++) {
-            if (testList[i].getFirst().equals(index)) {
-                testList[i].add(value);
+        for (LinkedList list : testList) {
+            if (list.getFirst().equals(index)) {
+                list.add(value);
+                testList[value].add(index);
             }
         }
     }
 
     @Override
     public String toString() {
-        for (int i = 0; i < testList.length; i++) {
-            System.out.print("[" + testList[i].getFirst() + "]" + " -> ");
-            printLinkedList(testList[i]);
+        for (LinkedList list : testList) {
+            System.out.print("[" + list.getFirst() + "]" + " -> ");
+            printLinkedList(list);
             System.out.println();
         }
         return "";

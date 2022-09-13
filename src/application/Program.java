@@ -42,8 +42,11 @@ public class Program {
         System.out.println(adjacencyList);;
         System.out.println("Ordem: " + vertices);
         System.out.println("Tamanho: " + edges);
+        System.out.print("Vertices isolados: ");
+        adjacencyList.searchIsolatedVertex();
         System.out.print("Vertices de extremidades: ");
         adjacencyList.searchEndVertex();
+        adjacencyList.degreeALlVertex();
     }
 
 }
