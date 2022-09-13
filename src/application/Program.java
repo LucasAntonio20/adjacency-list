@@ -22,18 +22,16 @@ public class Program {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             int i = 0;
+
+            line = br.readLine();
+            vertices = Integer.parseInt(line);
+            adjacencyList = new AdjacencyList(vertices);
+
+            line = br.readLine();
+            edges = Integer.parseInt(line);
             while ((line = br.readLine()) != null) {
-                if (i == 0) {
-                    i++;
-                    vertices = Integer.parseInt(line);
-                    adjacencyList = new AdjacencyList(vertices);
-                } else if (i == 1) {
-                    i++;
-                    edges = Integer.parseInt(line);
-                } else {
-                    String[] s = line.split(" ");
-                    adjacencyList.addItem(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
-                }
+                String[] s = line.split(" ");
+                adjacencyList.addEdge(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,6 +44,7 @@ public class Program {
         adjacencyList.searchIsolatedVertex();
         System.out.print("Vertices de extremidades: ");
         adjacencyList.searchEndVertex();
+        System.out.println("Ordem de cada vertice: ");
         adjacencyList.degreeALlVertex();
     }
 

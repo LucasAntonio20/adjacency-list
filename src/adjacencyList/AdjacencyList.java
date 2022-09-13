@@ -1,62 +1,61 @@
 package adjacencyList;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class AdjacencyList {
-    LinkedList[] testList;
+    private LinkedList<Integer>[] adjList;
 
     public AdjacencyList(){};
     public AdjacencyList(int size){
-        testList = new LinkedList[size];
-        for (int i = 0; i < testList.length; i++) {
-            testList[i] = new LinkedList<>();
-            testList[i].add(i);
+        adjList = new LinkedList[size];
+        for (int i = 0; i < adjList.length; i++) {
+            adjList[i] = new LinkedList<>();
+            adjList[i].add(i);
         }
     }
 
     public void degreeALlVertex(){
-        for (LinkedList list : testList) {
+        for (LinkedList list : adjList) {
             System.out.println("[" + list.getFirst() + "]: " + (list.size() - 1));
         }
     }
 
     public void searchEndVertex(){
-        for (LinkedList list : testList) {
+        for (LinkedList list : adjList) {
             if ((list.size() - 1) == 1) System.out.print(list.getFirst() + " ");
         }
         System.out.println();
     }
 
     public void searchIsolatedVertex() {
-        for (LinkedList list : testList) {
+        for (LinkedList list : adjList) {
             if ((list.size() - 1) == 0) System.out.print(list.getFirst() + " ");
         }
         System.out.println();
     }
 
-    public void addItem(int index, int value){
-        for (LinkedList list : testList) {
+    public void addEdge(int index, int value){
+        for (LinkedList list : adjList) {
             if (list.getFirst().equals(index)) {
                 list.add(value);
-                testList[value].add(index);
+                adjList[value].add(index);
             }
         }
     }
 
     @Override
     public String toString() {
-        for (LinkedList list : testList) {
+        for (LinkedList list : adjList) {
             System.out.print("[" + list.getFirst() + "]" + " -> ");
             printLinkedList(list);
-            System.out.println();
         }
         return "";
     }
 
     private void printLinkedList(LinkedList list){
         for (int i = 1; i < list.size(); i++) {
-            System.out.print(list.get(i)+" -> ");
+            if (i == list.size()-1) System.out.println(list.get(i));
+            else System.out.print(list.get(i)+" -> ");
         }
     }
 }
